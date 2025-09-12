@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot RAG</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <h1>Chatbot RAG</h1>
+
+        <div id="chat-box"></div>
+
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Digite sua pergunta..." autofocus>
+            <button onclick="sendMessage()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById('user-input');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            const chatBox = document.getElementById('chat-box');
+
+            // Adiciona mensagem do usuário
+            const userDiv = document.createElement('div');
+            userDiv.className = 'message user';
+            userDiv.textContent = message;
+            chatBox.appendChild(userDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            input.value = "";
+
+            // Envia mensagem para a API
+            const response = await fetch('/chat', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({message})
+            });
+
+            const data = await response.json();
+
+            // Adiciona resposta do bot
+            const botDiv = document.createElement('div');
+            botDiv.className = 'message bot';
+            botDiv.textContent = data.response;
+            chatBox.appendChild(botDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // Enviar mensagem ao pressionar "Enter"
+        document.getElementById('user-input').addEventListener('keypress', function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

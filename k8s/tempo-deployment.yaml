@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tempo
+  namespace: chatbot-monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tempo
+  template:
+    metadata:
+      labels:
+        app: tempo
+    spec:
+      securityContext:
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+      containers:
+      - name: tempo
+        image: grafana/tempo:2.5.0
+        args:
+        - "-config.file=/etc/tempo/tempo-local.yaml"
+        volumeMounts:
+        - name: tempo-config
+          mountPath: /etc/tempo
+        - name: tempo-data
+          mountPath: /var/tempo
+        ports:
+        - containerPort: 3200
+        - containerPort: 9095
+      volumes:
+      - name: tempo-config
+        configMap:
+          name: tempo-config
+      - name: tempo-data
+        emptyDir: {}

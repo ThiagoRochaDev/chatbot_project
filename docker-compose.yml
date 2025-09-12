@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  chatbot:
+    build: .
+    container_name: rag_chatbot
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./app/knowledge_base:/app/app/knowledge_base
+    environment:
+      - FLASK_ENV=development

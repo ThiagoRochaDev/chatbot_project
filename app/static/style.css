@@ -1,0 +1,126 @@
+/* ======== Global ======== */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #343541;
+    color: #ececec;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* ======== Chat Container ======== */
+.chat-container {
+    width: 50%;
+    max-width: 800px;
+    height: 80vh;
+    background: #40414f;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+/* ======== Header ======== */
+.chat-container h1 {
+    text-align: center;
+    padding: 15px;
+    background: #202123;
+    color: #ffffff;
+    margin: 0;
+    font-size: 1.4rem;
+    border-bottom: 1px solid #2c2c2e;
+}
+
+/* ======== Chat Box ======== */
+#chat-box {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background-color: #343541;
+}
+
+/* Scrollbar customizada */
+#chat-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+#chat-box::-webkit-scrollbar-thumb {
+    background: #5f5f63;
+    border-radius: 4px;
+}
+
+/* ======== Mensagens ======== */
+.message {
+    margin: 10px 0;
+    padding: 12px 15px;
+    border-radius: 8px;
+    max-width: 80%;
+    line-height: 1.4;
+    font-size: 0.95rem;
+    word-wrap: break-word;
+}
+
+/* Mensagem do usuário */
+.user {
+    background-color: #0d6efd;
+    color: #ffffff;
+    align-self: flex-end;
+}
+
+/* Mensagem do bot */
+.bot {
+    background-color: #565869;
+    color: #ffffff;
+    align-self: flex-start;
+}
+
+/* ======== Input ======== */
+.input-container {
+    display: flex;
+    background: #40414f;
+    padding: 10px;
+    border-top: 1px solid #2c2c2e;
+}
+
+#user-input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #2c2c2e;
+    color: #ffffff;
+    outline: none;
+    font-size: 1rem;
+    margin-right: 10px;
+}
+
+#user-input::placeholder {
+    color: #b0b0b0;
+}
+
+button {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #0b5ed7;
+}
+
+/* ======== Mobile ======== */
+@media (max-width: 768px) {
+    .chat-container {
+        width: 90%;
+        height: 90vh;
+    }
+}
