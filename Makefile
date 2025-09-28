@@ -18,7 +18,8 @@ shell:
 	docker exec -it rag_chatbot bash
 
 
-
+generate-base:
+	python app/generate_general_info.py
 
 
 grafana:
@@ -38,3 +39,6 @@ otel-collector:
 
 # all:
 #     minikube service grafana prometheus loki tempo otel-collector --url -n chatbot-monitoring
+
+# chatbot-app-service:
+#     minikube service chatbot-app-service -n chatbot-monitoring

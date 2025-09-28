@@ -15,7 +15,7 @@ from opentelemetry import trace, metrics
 from opentelemetry.instrumentation.flask import FlaskInstrumentor
 from opentelemetry.sdk.resources import SERVICE_NAME, Resource
 from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor, ConsoleSpanExporter
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
 from opentelemetry.sdk.metrics import MeterProvider
 from opentelemetry.sdk.metrics.export import PeriodicExportingMetricReader
@@ -47,20 +47,20 @@ resource = Resource.create({
 
 # Configurar logs
 logger_provider = LoggerProvider(resource=resource)
-logger_provider.add_log_record_processor(BatchLogRecordProcessor(OTLPLogExporter(endpoint="otel-collector:4317")))
+logger_provider.add_log_record_processor(BatchLogRecordProcessor(OTLPLogExporter(endpoint="http://otel-collector:4317")))
 handler = LoggingHandler(level=logging.INFO, logger_provider=logger_provider)
 logging.basicConfig(level=logging.INFO, handlers=[handler])
 
 # Configurar traces
 provider = TracerProvider(resource=resource)
-processor = BatchSpanProcessor(OTLPSpanExporter(endpoint="otel-collector:4317"))
+processor = BatchSpanProcessor(OTLPSpanExporter(endpoint="http://otel-collector:4317"))
 provider.add_span_processor(processor)
 trace.set_tracer_provider(provider)
 tracer = trace.get_tracer(__name__)
 
 # Configurar métricas
 reader = PeriodicExportingMetricReader(
-    OTLPMetricExporter(endpoint="otel-collector:4317")
+    OTLPMetricExporter(endpoint="http://otel-collector:4317")
 )
 meter_provider = MeterProvider(resource=resource, metric_readers=[reader])
 metrics.set_meter_provider(meter_provider)
@@ -224,4 +224,4 @@ def upload_file():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000)

@@ -16,8 +16,17 @@ Protótipo de um sistema que classifica perguntas do usuário em categorias (int
 ## Como rodar
 
 1) Chatbot RAG:
+
 ```
-python rag_chatbot.py
+make generate-base
+```
+
+```
+make build
+```
+
+```
+make up
 ```
 
 2) Classificador de Intenções:

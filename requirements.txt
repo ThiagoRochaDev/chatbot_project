@@ -17,3 +17,11 @@ opentelemetry-api
 opentelemetry-sdk
 opentelemetry-instrumentation-flask
 opentelemetry-exporter-otlp-proto-grpc
+pymupdf
+pandas
+python-docx
+openpyxl
+pytesseract
+pillow
+poppler-utils
+pdf2image

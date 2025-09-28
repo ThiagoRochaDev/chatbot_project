@@ -9,36 +9,35 @@ data:
       otlp:
         protocols:
           grpc:
-            endpoint: 0.0.0.0:4317
           http:
-            endpoint: 0.0.0.0:4318
 
     processors:
-      batch: {}
+      batch:
+        timeout: 10s
 
     exporters:
-      # Exporter para o Loki (Logs)
       loki:
-        endpoint: http://loki:3100/loki/api/v1/push
-      
-      # Exporter para o Prometheus (Métricas)
+        endpoint: "http://loki:3100/loki/api/v1/push"
+      # Este exportador expõe as métricas em um endpoint para o Prometheus
+      # poder extraí-las.
       prometheus:
         endpoint: "0.0.0.0:8889"
+        send_timestamps: true
+      otlp/tempo:
+        endpoint: "tempo.chatbot-monitoring.svc.cluster.local:4317"
+        tls:
+          insecure: true
 
-      # Exporter para o Tempo (Traces)
-      otlp:
-        endpoint: tempo:9095
-        
     service:
       pipelines:
         traces:
           receivers: [otlp]
           processors: [batch]
-          exporters: [otlp]
+          exporters: [otlp/tempo]
         metrics:
           receivers: [otlp]
           processors: [batch]
-          exporters: [prometheus]
+          exporters: [prometheus] # Pipeline agora usa o exportador prometheus
         logs:
           receivers: [otlp]
           processors: [batch]

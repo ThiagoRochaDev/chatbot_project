@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: otel-collector
   namespace: chatbot-monitoring
+  labels:
+    app: otel-collector
 spec:
   replicas: 1
   selector:
@@ -15,16 +17,18 @@ spec:
     spec:
       containers:
         - name: otel-collector
-          image: otel/opentelemetry-collector-contrib:0.103.0
-          args:
-            - "--config=/etc/otel-collector/otel-collector-config.yaml"
+          image: otel/opentelemetry-collector-contrib:0.99.0
+          command:
+            - "/otelcol-contrib"
+            - "--config=/conf/otel-collector-config.yaml"
+          volumeMounts:
+            - name: otel-collector-config-vol
+              mountPath: /conf
           ports:
             - containerPort: 4317
             - containerPort: 4318
-          volumeMounts:
-            - name: otel-config
-              mountPath: /etc/otel-collector
+            - containerPort: 8888
       volumes:
-        - name: otel-config
+        - name: otel-collector-config-vol
           configMap:
             name: otel-config

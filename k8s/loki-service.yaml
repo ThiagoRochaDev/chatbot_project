@@ -1,16 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: grafana-loki
+  name: loki
   namespace: chatbot-monitoring
 spec:
-  type: ClusterIP
   selector:
-    app: grafana-loki
+    app: loki
   ports:
-    - name: http
+    - protocol: TCP
       port: 3100
-      targetPort: 3100
-    - name: grpc
-      port: 9096
-      targetPort: 9096
+      targetPort: http-metrics
+      name: http-metrics
