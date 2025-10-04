@@ -1,0 +1,9 @@
+SAC - Serviço de Atendimento ao Cliente
+Telefone: 0800 123 4567
+E-mail: sac@omnitech.com.br
+WhatsApp: (11) 98765-4321
+
+Tempo médio de resposta:
+- Telefone: imediato em horário comercial
+- E-mail: até 24h úteis
+- WhatsApp: até 2h úteis

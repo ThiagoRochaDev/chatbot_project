@@ -1,0 +1,13 @@
+A OmniTech Solutions oferece três principais produtos:
+
+1. OmniERP
+   - Sistema de gestão empresarial integrado.
+   - Funcionalidades: controle financeiro, estoque, compras, vendas, relatórios personalizados.
+
+2. OmniCRM
+   - Sistema de relacionamento com clientes.
+   - Funcionalidades: automação de vendas, gestão de leads, histórico de clientes, integração com WhatsApp e e-mail.
+
+3. OmniCloud
+   - Plataforma de armazenamento e compartilhamento de arquivos em nuvem.
+   - Funcionalidades: backup automático, colaboração em tempo real, criptografia avançada.

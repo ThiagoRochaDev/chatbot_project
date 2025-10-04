@@ -39,3 +39,16 @@ Ambos funcionam apenas com Python padrão. Para melhor desempenho:
 ```
 pip install scikit-learn
 ```
+
+
+# exemplos de consultas:
+
+```
+“Qual o telefone do SAC?”
+
+“Quais os horários de atendimento presencial?”
+
+“O que é o OmniERP?”
+
+“Onde fica a sede da empresa?”
+```
